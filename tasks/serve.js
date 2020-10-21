@@ -2,14 +2,8 @@
 const { series, watch } = require('gulp');
 const browserSync = require('browser-sync').create();
 const config = require('./config');
-const { scss } = require('./scss');
-const { twig } = require('./twig');
+const { html } = require('./html');
 const { javascript } = require('./javascript');
-const { img } = require('./img');
-const { fonts } = require('./fonts');
-const { video } = require('./video');
-const { svgsprite } = require('./svgsprite');
-const { svgspritehtml } = require('./svgspritehtml');
 const { copyStatic } = require('./copyStatic');
 
 const serve = cb => {
@@ -22,12 +16,7 @@ const serve = cb => {
 
   watch(config.pages.watch).on(
     'change',
-    series(twig, browserSync.reload)
-  );
-
-  watch(config.styles.watch).on(
-    'change',
-    series(scss, browserSync.reload)
+    series(html, browserSync.reload)
   );
 
   watch(config.scripts.watch).on(
@@ -35,51 +24,10 @@ const serve = cb => {
     series(javascript, browserSync.reload)
   );
 
-  watch(config.img.input).on(
-    'change',
-    series(img, browserSync.reload)
-  );
-
-  watch(config.img.input).on(
-    'add',
-    series(img, browserSync.reload)
-  );
-
-  watch(config.video.input).on(
-    'change',
-    series(video, browserSync.reload)
-  );
-
-  watch(config.video.input).on(
-    'add',
-    series(video, browserSync.reload)
-  );
-
-  watch(config.fonts.input).on(
-    'change',
-    series(fonts, browserSync.reload)
-  );
-
-  watch(config.fonts.input).on(
-    'add',
-    series(fonts, browserSync.reload)
-  );
-  
-  watch(config.svgsprite.input).on(
-    'change',
-    series(svgsprite, svgspritehtml, browserSync.reload)
-  );
-  
-  watch(config.svgsprite.input).on(
-    'add',
-    series(svgsprite, svgspritehtml, browserSync.reload)
-  );
-
   watch(config.static.watch).on(
     'add',
     series(copyStatic, browserSync.reload)
   );
-  
 
   cb();
 };

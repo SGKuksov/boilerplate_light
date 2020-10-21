@@ -1,10 +1,10 @@
-const config = require('./tasks/config');
 const path = require('path');
+const config = require('./tasks/config');
 
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    app: config.scripts.input,
+    app: config.scripts.input
   },
   output: {
     filename: '[name].js',
@@ -16,27 +16,27 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: '/node_modules/',
+        exclude: '/node_modules/'
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: '/node_modules/',
-      },
+        exclude: '/node_modules/'
+      }
     ]
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      '@utils': path.resolve(__dirname, 'src/assets/scripts/utils/'),
+      '@utils': path.resolve(__dirname, 'src/assets/scripts/utils/')
     }
   },
   devServer: {
     overlay: false
-  },
+  }
 };
